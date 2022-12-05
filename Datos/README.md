@@ -1,1 +1,1 @@
-Ponga los datos en esta carpeta y sin espacios
+Ponga los datos en esta carpeta y sin espacios, guardelos como csv (están en xlsx)
