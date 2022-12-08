@@ -11,7 +11,6 @@ def cargar_datos(name):
 def guardar_datos(df, nombre):
     df.to_csv("/opt/airflow/data/" + nombre + ".csv" , encoding = 'latin1', sep=',', index=False)  
     
-    
 def procesar_datos():
     
     ## Dimension anio
@@ -33,7 +32,7 @@ def procesar_datos():
     ## Dimension produccionMineraDeMetales
     produccionInfo = produccionInfo.dropna(how='any', axis=0)
     produccionInfo = produccionInfo[produccionInfo['unidad_medida'].str.fullmatch('GRAMOS')]
-    produccionInfo= produccionInfo[['municipio_productor', 'a_o_produccion', 'valor_contraprestacion', 'cantidad_producci_n', 'recurso_natural', 'unidad_medida', 'codigo_dane']].groupby(['municipio_productor', 'a_o_produccion', 'recurso_natural', 'unidad_medida', 'codigo_dane']).sum().reset_index()
+    produccionInfo= produccionInfo[['municipio_productor', 'a_o_produccion', 'valor_contraprestacion', 'cantidad_producci_n', 'unidad_medida', 'codigo_dane']].groupby(['municipio_productor', 'a_o_produccion', 'unidad_medida', 'codigo_dane']).sum().reset_index()    
     produccionInfo['mineria_key'] = range(1, len(produccionInfo) + 1)
     column = 'cantidad_producci_n'
     produccionInfo[column] = MinMaxScaler().fit_transform(np.array(produccionInfo[column]).reshape(-1,1))
