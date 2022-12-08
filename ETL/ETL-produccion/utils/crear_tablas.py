@@ -15,7 +15,6 @@ def crear_tablas():
             Order_Key INT PRIMARY KEY,
             municipio_key INT REFERENCES municipio (municipio_key),
             anio_key INT REFERENCES anio (anio_key),
-            produccion_total DECIMAL,
-            recurso_natural VARCHAR(10)
+            produccion_total DECIMAL
         );
     """

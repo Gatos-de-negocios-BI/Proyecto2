@@ -30,13 +30,13 @@ def insert_query_municipio(**kwargs):
 
 # produccionMineraDeMetales insertion
 def insert_query_produccionMineraDeMetales(**kwargs):
-    insert = f"INSERT INTO produccionMineraDeMetales (Order_Key,municipio_key, anio_key, produccion_total, recurso_natural) VALUES "
+    insert = f"INSERT INTO produccionMineraDeMetales (Order_Key,municipio_key, anio_key, produccion_total) VALUES "
     insertQuery = ""
     # Es necesario colocar este try porque airflow comprueba el funcionamiento de las tareas en paralelo y al correr el DAG no existe el archivo dimension_city. Deben colocar try y except en todas las funciones de insert
     try:
         dataframe =cargar_datos(kwargs['csv_path'])
         for index, row in dataframe.iterrows():
-            insertQuery += insert + f"({row.mineria_key},{row.codigo_dane},{row.a_o_produccion}, {row.cantidad_producci_n}, \'{row.recurso_natural}\');\n"
+            insertQuery += insert + f"({row.mineria_key},{row.codigo_dane},{row.a_o_produccion}, {row.cantidad_producci_n});\n"
         return insertQuery
     except:
         return traceback.format_list()
